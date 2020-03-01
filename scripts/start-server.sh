@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ "${GAME_VERSION}" = "latest" ]; then
 	echo "---Getting latest OpenTTD build version...---"
-    LAT_V="$(curl -s https://api.github.com/repos/OpenTTD/OpenTTD/releases/latest | grep tag_name | cut -d '"' -f4)"
+    LAT_V="$(curl -s https://api.github.com/repos/JGRennison/OpenTTD-patches/releases/latest | grep tag_name | cut -d '"' -f4)"
     echo "---Latest OpenTTD build version is: $LAT_V---"
     INSTALL_V=$LAT_V
     if [ -z $LAT_V ]; then
@@ -23,14 +23,14 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
     sleep 15
     cd ${SERVER_DIR}
     if [ "${GAME_VERSION}" = "latest" ]; then
-    	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://proxy.binaries.openttd.org/openttd-releases/$INSTALL_V/openttd-$INSTALL_V-source.tar.xz ; then
+    	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
         	echo "---Successfully downloaded OpenTTD v$INSTALL_V---"
 		else
         	echo "---Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"
             sleep infinity
 		fi
     else
-    	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V http://master.binaries.openttd.org/binaries/releases/$INSTALL_V/openttd-$INSTALL_V-source.tar.xz ; then
+    	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
           	echo "---Successfully downloaded OpenTTD v$INSTALL_V---"
 		else
         	echo "---Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"
@@ -100,14 +100,14 @@ if [ "$INSTALL_V" != "$CUR_V" ]; then
     rm -R games
     rm -R share
     if [ "${GAME_VERSION}" = "latest" ]; then
-    	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://proxy.binaries.openttd.org/openttd-releases/$INSTALL_V/openttd-$INSTALL_V-source.tar.xz ; then
+    	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
         	echo "---Successfully downloaded OpenTTD v$INSTALL_V---"
 		else
         	echo "---Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"
             sleep infinity
 		fi
     else
-    	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V http://master.binaries.openttd.org/binaries/releases/$INSTALL_V/openttd-$INSTALL_V-source.tar.xz ; then
+    	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
           	echo "---Successfully downloaded OpenTTD v$INSTALL_V---"
 		else
         	echo "---Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"

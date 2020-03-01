@@ -35,7 +35,7 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
 		fi
     else
     	echo "Downloading: https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz"
-		if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
+		if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/$INSTALL_V.tar.gz ; then
           	echo "---Successfully downloaded OpenTTD v$INSTALL_V---"
 		else
         	echo "---Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"
@@ -43,6 +43,7 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
 		fi
     fi
     mkdir compileopenttd
+	echo "Untar installed_v_$INSTALL_V to ${SERVER_DIR}/compileopenttd/"
 	tar -xf installed_v_$INSTALL_V -C ${SERVER_DIR}/compileopenttd/
 	COMPVDIR="$(find ${SERVER_DIR}/compileopenttd -name open* -print -quit)"
 	cd $COMPVDIR
@@ -112,7 +113,7 @@ if [ "$INSTALL_V" != "$CUR_V" ]; then
             sleep infinity
 		fi
     else
-    	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
+    	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/$INSTALL_V.tar.gz ; then
           	echo "---Successfully downloaded OpenTTD v$INSTALL_V---"
 		else
         	echo "---Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"

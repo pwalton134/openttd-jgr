@@ -1,4 +1,6 @@
 #!/bin/bash
+echo "Game version = ${GAME_VERSION}"
+
 if [ "${GAME_VERSION}" = "latest" ]; then
 	echo "---Getting latest OpenTTD build version...---"
     LAT_V="$(curl -s https://api.github.com/repos/JGRennison/OpenTTD-patches/releases/latest | grep tag_name | cut -d '"' -f4)"

@@ -42,7 +42,7 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
             sleep infinity
 		fi
     fi
-    mkdir compileopenttd
+    mkdir ${SERVER_DIR}/compileopenttd
 	echo "Untar installed_v_$INSTALL_V to ${SERVER_DIR}/compileopenttd/"
 	tar -xf installed_v_$INSTALL_V -C ${SERVER_DIR}/compileopenttd/
 	COMPVDIR="$(find ${SERVER_DIR}/compileopenttd -name open* -print -quit)"
@@ -120,7 +120,7 @@ if [ "$INSTALL_V" != "$CUR_V" ]; then
             sleep infinity
 		fi
     fi
-	mkdir compileopenttd
+	mkdir ${SERVER_DIR}/compileopenttd
 	tar -xf installed_v_$INSTALL_V -C ${SERVER_DIR}/compileopenttd/
 	COMPVDIR="$(find ${SERVER_DIR}/compileopenttd -name openttd-* -print -quit)"
 	cd $COMPVDIR

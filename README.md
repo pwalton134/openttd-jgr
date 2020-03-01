@@ -1,2 +1,2 @@
 # openttd-jgr
-openttd-jgr docker build based on https://github.com/mijndert/openttd-docker
+openttd-jgr docker build based on  ich777/docker-openttd-server (https://github.com/ich777/docker-openttd-server)

@@ -45,7 +45,8 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
     mkdir ${SERVER_DIR}/compileopenttd
 	echo "Untar installed_v_$INSTALL_V to ${SERVER_DIR}/compileopenttd/"
 	tar -xf installed_v_$INSTALL_V -C ${SERVER_DIR}/compileopenttd/
-	COMPVDIR="$(find ${SERVER_DIR}/compileopenttd -name open* -print -quit)"
+	#COMPVDIR="$(find ${SERVER_DIR}/compileopenttd -name open* -print -quit)"
+	COMPVDIR="${SERVER_DIR}/compileopenttd/OpenTTD-patches-$INSTALL_V"
 	cd $COMPVDIR
 	$COMPVDIR/configure --prefix-dir=/serverdata/serverfiles --enable-dedicated --personal-dir=/serverfiles/openttd
     if [ ! -z "${COMPILE_CORES}" ]; then

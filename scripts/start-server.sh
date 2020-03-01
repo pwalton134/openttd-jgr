@@ -23,14 +23,15 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
     sleep 15
     cd ${SERVER_DIR}
     if [ "${GAME_VERSION}" = "latest" ]; then
-    	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
+    	##if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
+    	if wget -q -nc -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
         	echo "---Successfully downloaded OpenTTD v$INSTALL_V---"
 		else
         	echo "---Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"
             sleep infinity
 		fi
     else
-    	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
+    	if wget -q -nc -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
           	echo "---Successfully downloaded OpenTTD v$INSTALL_V---"
 		else
         	echo "---Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"
@@ -100,14 +101,14 @@ if [ "$INSTALL_V" != "$CUR_V" ]; then
     rm -R games
     rm -R share
     if [ "${GAME_VERSION}" = "latest" ]; then
-    	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
+    	if wget -q -nc -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
         	echo "---Successfully downloaded OpenTTD v$INSTALL_V---"
 		else
         	echo "---Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"
             sleep infinity
 		fi
     else
-    	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
+    	if wget -q -nc -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
           	echo "---Successfully downloaded OpenTTD v$INSTALL_V---"
 		else
         	echo "---Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"

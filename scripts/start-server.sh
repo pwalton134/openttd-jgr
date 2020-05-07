@@ -7,7 +7,7 @@ if [ "${GAME_VERSION}" = "latest" ]; then
     echo "---Latest OpenTTD build version is: $LAT_V---"
     INSTALL_V=$LAT_V
     if [ -z $LAT_V ]; then
-    	echo "---Something went wrong, couldn't get latest build version---"
+    	echo "---Code 1: Something went wrong, couldn't get latest build version---"
         sleep infinity
     fi
 else
@@ -15,9 +15,9 @@ else
 fi
 
 if [ ! -f ${SERVER_DIR}/games/openttd ]; then
-	echo
+    echo
     echo "-------------------------------------"
-	echo "---OpenTTD not found! Downloading,---"
+    echo "---OpenTTD not found! Downloading,---"
     echo "---compiling and installing v$INSTALL_V---"
     echo "---Please be patient, this can take--"
     echo "---some time, waiting 15 seconds..---"
@@ -28,17 +28,17 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
     	##if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
     	echo "Downloading: https://github.com/JGRennison/OpenTTD-patches/archive/$INSTALL_V.tar.gz"
 		if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/$INSTALL_V.tar.gz ; then
-        	echo "---Successfully downloaded OpenTTD v$INSTALL_V---"
+        	echo "---Code 2: Successfully downloaded OpenTTD v$INSTALL_V---"
 		else
-        	echo "---Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"
+        	echo "---Code 3: Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"
             sleep infinity
 		fi
     else
     	echo "Downloading: https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz"
 		if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/$INSTALL_V.tar.gz ; then
-          	echo "---Successfully downloaded OpenTTD v$INSTALL_V---"
+          	echo "---Code 4: Successfully downloaded OpenTTD v$INSTALL_V---"
 		else
-        	echo "---Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"
+        	echo "---Code 5: Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"
             sleep infinity
 		fi
     fi
@@ -58,7 +58,7 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
 	make install
 	rm -R ${SERVER_DIR}/compileopenttd
 	if [ ! -f ${SERVER_DIR}/games/openttd ]; then 
-		echo "---Something went wrong, couldn't install OpenTTD v$INSTALL_V---"
+		echo "---Code 6: Something went wrong, couldn't install OpenTTD v$INSTALL_V---"
         sleep infinity
     else
     	echo "---OpenTTD v$INSTALL_V installed---"
@@ -69,9 +69,9 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
         mkdir baseset
         cd ${SERVER_DIR}/games/baseset
         if wget -q -nc --show-progress --progress=bar:force:noscroll ${GFXPACK_URL} ; then
-        	echo "---Successfully downloaded OpenGFX---"
+        	echo "---Code 7: Successfully downloaded OpenGFX---"
 		else
-        	echo "---Can't download OpenGFX putting server into sleep mode---"
+        	echo "---Code 8: Can't download OpenGFX putting server into sleep mode---"
             sleep infinity
 		fi
 		unzip ${GFXPACK_URL##*/}
@@ -83,7 +83,7 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
 		rm $TAR.tar
         GFX="$(find ${SERVER_DIR}/games/baseset -maxdepth 1 -name '*grf')"
         if [ -z "$GFX" ]; then
-        	echo "---Something went wrong, couldn't install OpenGFX---"
+        	echo "---Code 9: Something went wrong, couldn't install OpenGFX---"
             sleep infinity
         fi
 	else
@@ -108,16 +108,16 @@ if [ "$INSTALL_V" != "$CUR_V" ]; then
     rm -R share
     if [ "${GAME_VERSION}" = "latest" ]; then
     	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/$INSTALL_V.tar.gz ; then
-        	echo "---Successfully downloaded OpenTTD v$INSTALL_V---"
+        	echo "---Code 10: Successfully downloaded OpenTTD v$INSTALL_V---"
 		else
-        	echo "---Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"
+        	echo "---Code 11: Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"
             sleep infinity
 		fi
     else
     	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/$INSTALL_V.tar.gz ; then
-          	echo "---Successfully downloaded OpenTTD v$INSTALL_V---"
+          	echo "---Code 12: Successfully downloaded OpenTTD v$INSTALL_V---"
 		else
-        	echo "---Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"
+        	echo "---Code 13: Can't download OpenTTD v$INSTALL_V putting server into sleep mode---"
             sleep infinity
 		fi
     fi
@@ -135,7 +135,7 @@ if [ "$INSTALL_V" != "$CUR_V" ]; then
 	make install
 	rm -R ${SERVER_DIR}/compileopenttd
 	if [ ! -f ${SERVER_DIR}/games/openttd ]; then 
-		echo "---Something went wrong, couldn't install OpenTTD v$INSTALL_V---"
+		echo "---Code 14: Something went wrong, couldn't install OpenTTD v$INSTALL_V---"
         sleep infinity
     else
     	echo "---OpenTTD v$INSTALL_V installed---"
@@ -146,9 +146,9 @@ if [ "$INSTALL_V" != "$CUR_V" ]; then
         mkdir baseset
         cd ${SERVER_DIR}/games/baseset
         if wget -q -nc --show-progress --progress=bar:force:noscroll ${GFXPACK_URL} ; then
-        	echo "---Successfully downloaded OpenGFX---"
+        	echo "---Code 15: Successfully downloaded OpenGFX---"
 		else
-        	echo "---Can't download OpenGFX putting server into sleep mode---"
+        	echo "---Code 16: Can't download OpenGFX putting server into sleep mode---"
             sleep infinity
 		fi
 		unzip ${GFXPACK_URL##*/}
@@ -160,7 +160,7 @@ if [ "$INSTALL_V" != "$CUR_V" ]; then
 		rm $TAR.tar
         GFX="$(find ${SERVER_DIR}/games/baseset -maxdepth 1 -name '*grf')"
         if [ -z "$GFX" ]; then
-        	echo "---Something went wrong, couldn't install OpenGFX---"
+        	echo "---Code 17: Something went wrong, couldn't install OpenGFX---"
             sleep infinity
         fi
 	else
@@ -176,9 +176,9 @@ if [ ! -d ${SERVER_DIR}/games/baseset ]; then
     mkdir baseset
     cd ${SERVER_DIR}/games/baseset
 	if wget -q -nc --show-progress --progress=bar:force:noscroll ${GFXPACK_URL} ; then
-		echo "---Successfully downloaded OpenGFX---"
+		echo "---Code 18: Successfully downloaded OpenGFX---"
 	else
-		echo "---Can't download OpenGFX putting server into sleep mode---"
+		echo "---Code 19: Can't download OpenGFX putting server into sleep mode---"
 		sleep infinity
 	fi
 	unzip ${GFXPACK_URL##*/}
@@ -190,7 +190,7 @@ if [ ! -d ${SERVER_DIR}/games/baseset ]; then
 	rm $TAR.tar
     GFX="$(find ${SERVER_DIR}/games/baseset -maxdepth 1 -name '*grf')"
     if [ -z "$GFX" ]; then
-    	echo "---Something went wrong, couldn't install OpenGFX---"
+    	echo "---Code 20: Something went wrong, couldn't install OpenGFX---"
         sleep infinity
     fi
 else

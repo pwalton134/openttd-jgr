@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "Docker file Ver:1.00 Build:28"
 echo "Game version = ${GAME_VERSION}"
 
 if [ "${GAME_VERSION}" = "latest" ]; then
@@ -56,6 +57,7 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
 	cd $COMPVDIR
 	echo "...configuring compiler"
 	$COMPVDIR/configure --prefix-dir=/serverdata/serverfiles --enable-dedicated --personal-dir=/serverfiles/openttd
+		
     if [ ! -z "${COMPILE_CORES}" ]; then
     	CORES_AVAILABLE=${COMPILE_CORES}
     else
@@ -67,7 +69,7 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
 	echo "...installing Openttd"
 	make install
 	echo "...removing temporary compiler dir"
-	rm -R ${SERVER_DIR}/compileopenttd
+	#rm -R ${SERVER_DIR}/compileopenttd
 	echo "...checking Openttd installed correctly"
 	if [ ! -f ${SERVER_DIR}/games/openttd ]; then 
 		echo "---Code 6: Something went wrong, couldn't install OpenTTD v$INSTALL_V---"

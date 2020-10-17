@@ -1,5 +1,5 @@
-FROM ich777/debian-baseimage
-#FROM ubuntu
+#FROM ich777/debian-baseimage
+FROM ubuntu
 
 LABEL maintainer="github@pwalton134.co.uk"
 

@@ -1,7 +1,8 @@
 #!/bin/bash
-echo "Docker file Ver:1.00 Build:28"
+echo "Docker file Ver:2.00 Build:29"
 echo "Game version = ${GAME_VERSION}"
 
+#CHECK GAME VERSION REQUESTED
 if [ "${GAME_VERSION}" = "latest" ]; then
 	echo "---Getting latest OpenTTD build version...---"
     LAT_V="$(curl -s https://api.github.com/repos/JGRennison/OpenTTD-patches/releases/latest | grep tag_name | cut -d '"' -f4)"
@@ -15,6 +16,7 @@ else
 	INSTALL_V=${GAME_VERSION}
 fi
 
+#CHECK IF OPENTTD EXISTS AND DOWNLOAD AND INSTALL IF NOT
 if [ ! -f ${SERVER_DIR}/games/openttd ]; then
     echo
     echo "-------------------------------------"
@@ -24,6 +26,8 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
     echo "---some time, waiting 15 seconds..---"
     echo "-------------------------------------"
     sleep 15
+    
+    #DOWNLOAD
     cd ${SERVER_DIR}
     if [ "${GAME_VERSION}" = "latest" ]; then
     	##if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz ; then
@@ -43,6 +47,8 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
             sleep infinity
 		fi
     fi
+    
+    #COMPILE
     echo "...creating temporary compile dir"
     mkdir ${SERVER_DIR}/compileopenttd
 	echo "...extracting source files"
@@ -50,24 +56,27 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
 	tar -xf installed_v_$INSTALL_V -C ${SERVER_DIR}/compileopenttd/
 	echo "...finding openttd compile path"
 	#COMPVDIR="$(find ${SERVER_DIR}/compileopenttd -name open* -print -quit)"
-	COMPVDIR="$(find ${SERVER_DIR}/compileopenttd -name open* -print -quit)"
+	COMPVDIR="$(find ${SERVER_DIR}/compileopenttd -name build-dedicated.sh -print -quit)"
 	#COMPVDIR="${SERVER_DIR}/compileopenttd/OpenTTD-patches-$INSTALL_V"
 	echo "$COMPVDIR"
 	echo "...entering compiler dir"
 	cd $COMPVDIR
-	echo "...configuring compiler"
-	$COMPVDIR/configure --prefix-dir=/serverdata/serverfiles --enable-dedicated --personal-dir=/serverfiles/openttd
+	#echo "...configuring compiler"
+	#$COMPVDIR/configure --prefix-dir=/serverdata/serverfiles --enable-dedicated --personal-dir=/serverfiles/openttd
 		
     if [ ! -z "${COMPILE_CORES}" ]; then
     	CORES_AVAILABLE=${COMPILE_CORES}
     else
-		CORES_AVAILABLE="$(getconf _NPROCESSORS_ONLN)"
+	CORES_AVAILABLE="$(getconf _NPROCESSORS_ONLN)"
     fi
-    	echo "...cores available $CORES_AVAILABLE"
+    	
+	echo "...cores available $CORES_AVAILABLE"
 	echo "...compiling Openttd"
-	make --jobs=$CORES_AVAILABLE
-	echo "...installing Openttd"
-	make install
+	#make --jobs=$CORES_AVAILABLE
+	$COMPVDIR/build-dedicated.sh
+	echo "...installing OpenTTD"
+	#make install
+	
 	echo "...removing temporary compiler dir"
 	#rm -R ${SERVER_DIR}/compileopenttd
 	echo "...checking Openttd installed correctly"
@@ -78,6 +87,8 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
     	else
     		echo "---OpenTTD v$INSTALL_V installed---"
     	fi
+	
+    #INSTALL BASESET	
     if [ ! -d ${SERVER_DIR}/games/baseset ]; then
     	echo "---OpenGFX not found, downloading...---"
         cd ${SERVER_DIR}/games
@@ -106,6 +117,7 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
     fi
 fi
 
+#CHECK IF ALREADY INSTALLED VERSION MATCHES REQUESTED.  IF NOT, DOWNLOAD AND INSTALL REQUESTED.
 CUR_V="$(find ${SERVER_DIR} -name installed_v_* | cut -d "_" -f3)"
 if [ "$INSTALL_V" != "$CUR_V" ]; then
 	echo
@@ -121,6 +133,8 @@ if [ "$INSTALL_V" != "$CUR_V" ]; then
     rm installed_v_$CUR_V
     rm -R games
     rm -R share
+    
+    #DOWNLOAD
     if [ "${GAME_VERSION}" = "latest" ]; then
     	if wget -q -nc --show-progress --progress=bar:force:noscroll -O installed_v_$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/$INSTALL_V.tar.gz ; then
         	echo "---Code 10: Successfully downloaded OpenTTD v$INSTALL_V---"
@@ -136,6 +150,8 @@ if [ "$INSTALL_V" != "$CUR_V" ]; then
             sleep infinity
 		fi
     fi
+    
+    #COMPILE
 	mkdir ${SERVER_DIR}/compileopenttd
 	tar -xf installed_v_$INSTALL_V -C ${SERVER_DIR}/compileopenttd/
 	COMPVDIR="$(find ${SERVER_DIR}/compileopenttd -name openttd-* -print -quit)"
@@ -155,6 +171,8 @@ if [ "$INSTALL_V" != "$CUR_V" ]; then
     else
     	echo "---OpenTTD v$INSTALL_V installed---"
     fi
+    
+    #DOWNLOAD BASESET
     if [ ! -d ${SERVER_DIR}/games/baseset ]; then
     	echo "---OpenGFX not found, downloading...---"
         cd ${SERVER_DIR}/games
@@ -185,6 +203,7 @@ else
 	echo "---OpenTTD v$LAT_V found---"
 fi
 
+#INSTALL BASESET IF NOT ALREADY
 if [ ! -d ${SERVER_DIR}/games/baseset ]; then
 	echo "---OpenGFX not found, downloading...---"
     cd ${SERVER_DIR}/games
@@ -212,6 +231,7 @@ else
 	echo "---OpenGFX found---"
 fi
 
+#START SERVER
 echo "---Prepare Server---"
 chmod -R ${DATA_PERM} ${DATA_DIR}
 echo "---Checking for old logs---"

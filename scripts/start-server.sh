@@ -42,27 +42,40 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
             sleep infinity
 		fi
     fi
+    echo "...creating temporary compile dir"
     mkdir ${SERVER_DIR}/compileopenttd
+	echo "...extracting source files"
 	echo "Untar installed_v_$INSTALL_V to ${SERVER_DIR}/compileopenttd/"
 	tar -xf installed_v_$INSTALL_V -C ${SERVER_DIR}/compileopenttd/
+	echo "...finding openttd compile path"
 	#COMPVDIR="$(find ${SERVER_DIR}/compileopenttd -name open* -print -quit)"
-	COMPVDIR="${SERVER_DIR}/compileopenttd/OpenTTD-patches-$INSTALL_V"
+	COMPVDIR="$(find ${SERVER_DIR}/compileopenttd -name open* -print -quit)"
+	#COMPVDIR="${SERVER_DIR}/compileopenttd/OpenTTD-patches-$INSTALL_V"
+	echo "$COMPVDIR"
+	echo "...entering compiler dir"
 	cd $COMPVDIR
+	echo "...configuring compiler"
 	$COMPVDIR/configure --prefix-dir=/serverdata/serverfiles --enable-dedicated --personal-dir=/serverfiles/openttd
     if [ ! -z "${COMPILE_CORES}" ]; then
     	CORES_AVAILABLE=${COMPILE_CORES}
     else
 		CORES_AVAILABLE="$(getconf _NPROCESSORS_ONLN)"
     fi
+    	echo "...cores available $CORES_AVAILABLE"
+	echo "...compiling Openttd"
 	make --jobs=$CORES_AVAILABLE
+	echo "...installing Openttd"
 	make install
+	echo "...removing temporary compiler dir"
 	rm -R ${SERVER_DIR}/compileopenttd
+	echo "...checking Openttd installed correctly"
 	if [ ! -f ${SERVER_DIR}/games/openttd ]; then 
 		echo "---Code 6: Something went wrong, couldn't install OpenTTD v$INSTALL_V---"
-        sleep infinity
-    else
-    	echo "---OpenTTD v$INSTALL_V installed---"
-    fi
+        	"...Done!"
+		sleep infinity
+    	else
+    		echo "---OpenTTD v$INSTALL_V installed---"
+    	fi
     if [ ! -d ${SERVER_DIR}/games/baseset ]; then
     	echo "---OpenGFX not found, downloading...---"
         cd ${SERVER_DIR}/games

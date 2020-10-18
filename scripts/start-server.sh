@@ -54,15 +54,16 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
 	echo "...extracting source files"
 	echo "Untar installed_v_$INSTALL_V to ${SERVER_DIR}/compileopenttd/"
 	tar -xf installed_v_$INSTALL_V -C ${SERVER_DIR}/compileopenttd/
+	
 	echo "...finding openttd compile path"
 	#COMPVDIR="$(find ${SERVER_DIR}/compileopenttd -name open* -print -quit)"
-	COMPVDIR="$(find ${SERVER_DIR}/compileopenttd -name build-dedicated.sh -print -quit)"
+	BUILDDED="$(find ${SERVER_DIR}/compileopenttd -name build-dedicated.sh -print -quit)"
+	BUILDBUN="$(find ${SERVER_DIR}/compileopenttd -name build-dedicated.sh -print -quit)"
+	COMPVDIR="$(dirname $BUILDDED)"
 	#COMPVDIR="${SERVER_DIR}/compileopenttd/OpenTTD-patches-$INSTALL_V"
 	echo "$COMPVDIR"
-	echo "...entering compiler dir"
-	cd $COMPVDIR
-	#echo "...configuring compiler"
-	#$COMPVDIR/configure --prefix-dir=/serverdata/serverfiles --enable-dedicated --personal-dir=/serverfiles/openttd
+	echo "$BUILDDED"
+	echo "$BUILDBUN"
 		
     if [ ! -z "${COMPILE_CORES}" ]; then
     	CORES_AVAILABLE=${COMPILE_CORES}
@@ -73,7 +74,11 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
 	echo "...cores available $CORES_AVAILABLE"
 	echo "...compiling Openttd"
 	#make --jobs=$CORES_AVAILABLE
-	$COMPVDIR/build-dedicated.sh
+	$BUILDDED
+	
+	echo "...making install bundle"
+	$BUILDBUN
+	
 	echo "...installing OpenTTD"
 	#make install
 	

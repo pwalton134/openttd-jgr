@@ -1,5 +1,6 @@
 #FROM ich777/debian-baseimage
 FROM ubuntu:latest
+#FROM debian:stable-slim
 
 LABEL maintainer="github@pwalton134.co.uk"
 

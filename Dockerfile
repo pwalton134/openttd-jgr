@@ -1,15 +1,23 @@
 #FROM ich777/debian-baseimage
 FROM ubuntu:latest
 
+LABEL maintainer="github@pwalton134.co.uk"
+
 ENV TZ=Europe/London
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-LABEL maintainer="github@pwalton134.co.uk"
-
 RUN apt-get update && \
-	apt-get -y install --no-install-recommends unzip xz-utils curl liblzma-dev build-essential libsdl1.2-dev zlib1g-dev liblzo2-dev timidity dpatch libfontconfig-dev libicu-dev screen cmake && \
+	apt-get -y install --no-install-recommends unzip xz-utils curl liblzma-dev build-essential libsdl1.2-dev zlib1g-dev liblzo2-dev timidity dpatch libfontconfig-dev libicu-dev screen cmake wget locales procps && \
+	touch /etc/locale.gen && \
+	echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
+	locale-gen && \
+	apt-get -y install --reinstall ca-certificates && \
 	rm -rf /var/lib/apt/lists/*
 
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
+	
 ENV DATA_DIR="/serverdata"
 ENV SERVER_DIR="${DATA_DIR}/serverfiles"
 ENV GAME_PARAMS="template"

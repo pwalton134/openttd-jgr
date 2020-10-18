@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Docker file Ver:2.00 Build:29"
+echo "Docker file Ver:2.00 Build:39"
 echo "Game version = ${GAME_VERSION}"
 
 #CHECK GAME VERSION REQUESTED
@@ -57,8 +57,10 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
 	
 	echo "...finding openttd compile path"
 	#COMPVDIR="$(find ${SERVER_DIR}/compileopenttd -name open* -print -quit)"
+	#find cmake for dedicated server build
 	BUILDDED="$(find ${SERVER_DIR}/compileopenttd -name build-dedicated.sh -print -quit)"
-	BUILDBUN="$(find ${SERVER_DIR}/compileopenttd -name build-dedicated.sh -print -quit)"
+	#find cmake for building installer bundle (.deb)
+	BUILDBUN="$(find ${SERVER_DIR}/compileopenttd -name make_bundle.sh -print -quit)"
 	COMPVDIR="$(dirname $BUILDDED)"
 	#COMPVDIR="${SERVER_DIR}/compileopenttd/OpenTTD-patches-$INSTALL_V"
 	echo "$COMPVDIR"
@@ -73,17 +75,22 @@ if [ ! -f ${SERVER_DIR}/games/openttd ]; then
     	
 	echo "...cores available $CORES_AVAILABLE"
 	echo "...compiling Openttd"
-	#make --jobs=$CORES_AVAILABLE
 	$BUILDDED
 	
-	echo "...making install bundle"
-	$BUILDBUN
+	cd $COMPVDIR/build
+	
+	echo "...making Openttd"
+	make --jobs=$CORES_AVAILABLE
+	
+	#echo "...making install bundle"
+	#$BUILDBUN <-- don't use this script as it throws a versioning issue error when installing the .deb via dpkg / apt.  Use make and make install as per JGR compile instructions.
 	
 	echo "...installing OpenTTD"
-	#make install
+	make install
 	
 	echo "...removing temporary compiler dir"
 	#rm -R ${SERVER_DIR}/compileopenttd
+	
 	echo "...checking Openttd installed correctly"
 	if [ ! -f ${SERVER_DIR}/games/openttd ]; then 
 		echo "---Code 6: Something went wrong, couldn't install OpenTTD v$INSTALL_V---"

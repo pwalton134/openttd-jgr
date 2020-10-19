@@ -24,3 +24,4 @@ fi
 
 sleep 2
 tail -f ${SERVER_DIR}/masterLog.0
+sleep infinity

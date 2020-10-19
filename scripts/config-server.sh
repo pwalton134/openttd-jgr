@@ -174,6 +174,7 @@ echo "==================================="
 echo ""
 
 echo "Checking permissions and clearing logs..."
+chown -R openTTD:users ${DATA_PERM}
 chmod -R ${DATA_PERM} ${DATA_DIR}
 find ${SERVER_DIR} -name "masterLog.*" -exec rm -f {} \;
 echo "...done!"

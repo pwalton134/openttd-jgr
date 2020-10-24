@@ -32,6 +32,9 @@ ENV GID=100
 ENV DATA_PERM=770
 ENV USER="openTTD"
 
+EXPOSE 3979/tcp
+EXPOSE 3979/udp
+
 RUN mkdir $DATA_DIR && \
 	mkdir $SERVER_DIR && \
 	useradd -d $DATA_DIR/serverfiles -s /bin/bash $USER && \

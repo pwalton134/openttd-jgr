@@ -1,4 +1,9 @@
 #!/bin/bash
+echo "================================"
+echo "|      Init server scripts     |"
+echo "|------------------------------|"
+echo "Docker build: $BUILD_V"
+echo "================================"
 echo "---Checking if UID: ${UID} matches user---"
 usermod -u ${UID} ${USER}
 echo "---Checking if GID: ${GID} matches user---"

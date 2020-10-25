@@ -4,7 +4,7 @@ FROM debian:stable-slim
 
 LABEL maintainer="github@pwalton134.co.uk"
 
-ENV BUILD_V=59
+ENV BUILD_V=60
 ENV TZ=Europe/London
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
@@ -24,6 +24,7 @@ ENV DATA_DIR="/serverdata"
 ENV SERVER_DIR="${DATA_DIR}/serverfiles"
 ENV GAME_PARAMS="template"
 ENV GAME_PORT=3979
+ENV GAME_PORT_MASTER=3978
 ENV SERVER_IP=""
 ENV GAME_VERSION=1.9.1
 ENV COMPILE_CORES=""
@@ -34,10 +35,10 @@ ENV GID=100
 ENV DATA_PERM=770
 ENV USER="openTTD"
 
-#EXPOSE $GAME_PORT/tcp
-#EXPOSE $GAME_PORT/udp
-#EXPOSE 3978/tcp
-#EXPOSE 3978/udp
+EXPOSE $GAME_PORT/tcp
+EXPOSE $GAME_PORT/udp
+EXPOSE $GAME_PORT_MASTER/tcp
+EXPOSE $GAME_PORT_MASTER/udp
 
 RUN mkdir $DATA_DIR && \
 	mkdir $SERVER_DIR && \

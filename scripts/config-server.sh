@@ -2,7 +2,7 @@
 echo "==================================="
 echo "| OpenTTD-JGR Patch Configurator  |"
 echo "==================================="
-echo "|Docker file Ver:2.00 Build:39"
+echo "|Docker file Ver: $BUILD_V"
 echo "|Author: pwalton134"
 echo "|Game version requested: ${GAME_VERSION}"
 echo "-----------------------------------"

@@ -1,6 +1,12 @@
 #!/bin/bash
 
 #START SERVER
+echo "================================"
+echo "|     Starting Game Server     |"
+echo "|------------------------------|"
+echo "Docker build: $BUILD_V"
+echo "================================"
+
 echo "Starting server execution script"
 
 echo "---Start Server---"

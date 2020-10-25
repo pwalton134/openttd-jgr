@@ -4,7 +4,7 @@ FROM debian:stable-slim
 
 LABEL maintainer="github@pwalton134.co.uk"
 
-ENV BUILD_V=57
+ENV BUILD_V=58
 ENV TZ=Europe/London
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
@@ -36,6 +36,8 @@ ENV USER="openTTD"
 
 EXPOSE $GAME_PORT/tcp
 EXPOSE $GAME_PORT/udp
+EXPOSE 3978/tcp
+EXPOSE 3978/udp
 
 RUN mkdir $DATA_DIR && \
 	mkdir $SERVER_DIR && \

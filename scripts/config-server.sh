@@ -1,4 +1,4 @@
- #!/bin/bash
+ #!/bin/bash 
 echo "==================================="
 echo "| OpenTTD-JGR Patch Configurator  |"
 echo "==================================="

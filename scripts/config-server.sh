@@ -57,7 +57,7 @@ if [ $INSTALLED = 0 ]; then
 	rm jgrpp*
 
 	echo "Downloading: https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz"
-		if wget -q -nc --show-progress --progress=bar:force:noscroll -O $INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/$INSTALL_V.tar.gz ; then
+		if wget -q -nc --show-progress --progress=bar:force:noscroll -O $SERVER_DIR/$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/$INSTALL_V.tar.gz ; then
           		echo "Successfully downloaded OpenTTD v$INSTALL_V---"
 			mkdir ${SERVER_DIR}/compileopenttd
 			echo "Extracting $INSTALL_V.tar.gz to ${SERVER_DIR}/compileopenttd/"

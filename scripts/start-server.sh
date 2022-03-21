@@ -9,7 +9,7 @@ echo "================================"
 
 echo "Starting server execution script"
 echo "...exporting path to openttd"
-export PATH=$PATH:/usr/local/games/openttd
+export PATH=$PATH:/usr/local/games/
 echo "---Start Server---"
 cd ${SERVER_DIR} 
 

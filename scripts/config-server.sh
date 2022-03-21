@@ -114,7 +114,9 @@ if [ $DOWNLOAD_INSTALL == 1 ]; then
 		echo "FATAL: Something went wrong, couldn't install OpenTTD v$INSTALL_V---"
 		sleep infinity
     	else
-    		echo "---OpenTTD v$INSTALL_V installed successfully!---"
+                echo "...exporting path to openttd"
+                export PATH=$PATH:/usr/local/games/openttd
+		echo "---OpenTTD v$INSTALL_V installed successfully!---"
     	fi
 	echo "Build and installation complete!"
 else

@@ -57,11 +57,11 @@ if [ $INSTALLED = 0 ]; then
 	rm jgrpp*
 
 	echo "Downloading: https://github.com/JGRennison/OpenTTD-patches/archive/jgrpp-$INSTALL_V.tar.gz"
-		if wget -q -nc --show-progress --progress=bar:force:noscroll -O $SERVER_DIR/$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/$INSTALL_V.tar.gz ; then
+		if wget -q -nc --show-progress --progress=bar:force:noscroll -O ${SERVER_DIR}/$INSTALL_V https://github.com/JGRennison/OpenTTD-patches/archive/$INSTALL_V.tar.gz ; then
           		echo "Successfully downloaded OpenTTD v$INSTALL_V---"
 			mkdir ${SERVER_DIR}/compileopenttd
-			echo "Extracting $INSTALL_V.tar.gz to ${SERVER_DIR}/compileopenttd/"
-			tar -xf $INSTALL_V -C ${SERVER_DIR}/compileopenttd/
+			echo "Extracting ${SERVER_DIR}/$INSTALL_V.tar.gz to ${SERVER_DIR}/compileopenttd/"
+			tar -xf ${SERVER_DIR}/$INSTALL_V -C ${SERVER_DIR}/compileopenttd/
 			DOWNLOAD_INSTALL=1
 		else
         		DOWNLOAD_INSTALL=0
@@ -110,11 +110,13 @@ if [ $DOWNLOAD_INSTALL == 1 ]; then
 	mv ./$INSTALL_V ./installed_v_$INSTALL_V
 
 	echo "...checking Openttd installed correctly"
-	if [ ! -f /usr/local/bin/openttd ]; then 
+	if [ ! -f /usr/local/games/openttd ]; then 
 		echo "FATAL: Something went wrong, couldn't install OpenTTD v$INSTALL_V---"
 		sleep infinity
     	else
-    		echo "---OpenTTD v$INSTALL_V installed successfully!---"
+                echo "...exporting path to openttd"
+                export PATH=$PATH:/usr/local/games/openttd
+		echo "---OpenTTD v$INSTALL_V installed successfully!---"
     	fi
 	echo "Build and installation complete!"
 else

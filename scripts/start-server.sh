@@ -8,7 +8,8 @@ echo "Docker build: $BUILD_V"
 echo "================================"
 
 echo "Starting server execution script"
-
+echo "...exporting path to openttd"
+export PATH=$PATH:/usr/local/games/openttd
 echo "---Start Server---"
 cd ${SERVER_DIR} 
 

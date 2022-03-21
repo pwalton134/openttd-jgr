@@ -26,7 +26,7 @@ else
 fi
 
 #Check if game is already installed
-if [ ! -f /usr/local/bin/openttd ]; then
+if [ ! -f /usr/local/games/openttd ]; then
 	INSTALLED=0
 	echo "---OpenTTD not found---"
 else
@@ -115,7 +115,7 @@ if [ $DOWNLOAD_INSTALL == 1 ]; then
 		sleep infinity
     	else
                 echo "...exporting path to openttd"
-                export PATH=$PATH:/usr/local/games/openttd
+                export PATH=$PATH:/usr/local/games/
 		echo "---OpenTTD v$INSTALL_V installed successfully!---"
     	fi
 	echo "Build and installation complete!"

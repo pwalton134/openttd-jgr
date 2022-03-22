@@ -136,7 +136,7 @@ fi
 		echo "---OpenGFX setup---"
 	        echo "Baseset directory not found.  Creating..."
 		cd ${SERVER_DIR}/.openttd
-        	mkdir baseset
+        	mkdir ${SERVER_DIR}/.openttd/baseset
 	        cd ${SERVER_DIR}/.openttd/baseset
         fi
 

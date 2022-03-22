@@ -126,6 +126,7 @@ fi
 #Move game data dir to /.openTTD
 	if [ ! -d ${SERVER_DIR}/.openttd ]; then
 		echo "Copying data dir to user space"
+		/usr/local/games/openttd -D			# Dirty fudge to force directory creation.
 		cp /root/.openttd ${SERVER_DIR}/ -r
 		cp ~/.local/share/openttd ${SERVER_DIR}/ -r
 	else

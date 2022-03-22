@@ -127,6 +127,7 @@ fi
 	if [ ! -d ${SERVER_DIR}/.openttd ]; then
 		echo "Copying data dir to user space"
 		cp /root/.openttd ${SERVER_DIR}/ -r
+		cp ~/.local/share/openttd ${SERVER_DIR}/ -r
 	else
 		echo "Data dir found in user space"
 	fi

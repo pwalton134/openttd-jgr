@@ -128,7 +128,7 @@ fi
 		echo "Copying data dir to user space"
 		/usr/local/games/openttd -D			# Dirty fudge to force directory creation.
 		cp /root/.openttd ${SERVER_DIR}/ -r
-		cp ~/.local/share/openttd ${SERVER_DIR}/ -r
+		cp ~/.local/share/openttd ${SERVER_DIR}/.openttd -r
 	else
 		echo "Data dir found in user space"
 	fi

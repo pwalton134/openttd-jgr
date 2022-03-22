@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>openttd-jgr-1</Name>
+  <Repository>pwalton134/openttd-jgr</Repository>
+  <Registry>https://hub.docker.com/r/pwalton134/openttd-jgr/</Registry>
+  <Network>host</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://hub.docker.com/r/pwalton134/openttd-jgr/</Support>
+  <Project>https://www.openttd.org/</Project>
+  <Overview>This Docker is based on the work of ich777 (https://github.com/ich777/docker-openttd-server) and has been modified to install the OpenTTD-JGR patched version of the game instead (https://github.com/JGRennison/OpenTTD-patches).  The work of the original authors remains their own and please donate to them if you appreciate their work.  My contributions are purely to copy and modify such that I can enjoy the games in an expanded manner.</Overview>
+  <Category>GameServers:</Category>
+  <WebUI/>
+  <TemplateURL/>
+  <Icon>https://raw.githubusercontent.com/pwalton134/unraid-docker-templates/master/icons/openttd-128.png</Icon>
+  <ExtraParams>--restart=unless-stopped</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1647956118</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Description>This Docker is based on the work of ich777 (https://github.com/ich777/docker-openttd-server) and has been modified to install the OpenTTD-JGR patched version of the game instead (https://github.com/JGRennison/OpenTTD-patches).  The work of the original authors remains their own and please donate to them if you appreciate their work.  My contributions are purely to copy and modify such that I can enjoy the games in an expanded manner.</Description>
+  <Networking>
+    <Mode>host</Mode>
+    <Publish>
+      <Port>
+        <HostPort>3979</HostPort>
+        <ContainerPort>3979</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>3979</HostPort>
+        <ContainerPort>3979</ContainerPort>
+        <Protocol>udp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>3978</HostPort>
+        <ContainerPort>3978</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>3978</HostPort>
+        <ContainerPort>3978</ContainerPort>
+        <Protocol>udp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/openttd-jgr</HostDir>
+      <ContainerDir>/serverdata/serverfiles</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value/>
+      <Name>SERVER_IP</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>last-game</Value>
+      <Name>GAME_PARAMS</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>latest</Value>
+      <Name>GAME_VERSION</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>http://bundles.openttdcoop.org/opengfx/releases/0.5.5/opengfx-0.5.5.zip</Value>
+      <Name>GFXPACK_URL</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>COMPILE_CORES</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="ServerFiles" Target="/serverdata/serverfiles" Default="" Mode="rw" Description="Container Path: /serverdata/serverfiles" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/openttd-jgr</Config>
+  <Config Name="SERVER_IP" Target="SERVER_IP" Default="" Mode="" Description="Custom server IP if required.  Using 0.0.0.0 may help if you are getting port and server bind errors." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="GAME_PARAMS" Target="GAME_PARAMS" Default="" Mode="" Description="Enter your extra start up commands for the server if needed otherwise leave blank.  To auto-load the latest autosave, type 'last-game' with no further arguments.  To load a specific savegame you MUST specifie the following '-g /serverdata/serverfiles/openttd/save/YOUR_SAVEGAME.sav'.  You can also customize if not loading latest.  The path always begins with '/serverdata/serverfiles/'" Type="Variable" Display="always" Required="false" Mask="false">last-game</Config>
+  <Config Name="TCP - Game Port" Target="3979" Default="" Mode="tcp" Description="Container Port: 3979" Type="Port" Display="always" Required="true" Mask="false">3979</Config>
+  <Config Name="UDP - Game Port" Target="3979" Default="" Mode="udp" Description="Container Port: 3979" Type="Port" Display="always" Required="true" Mask="false">3979</Config>
+  <Config Name="TCP - Game Port2" Target="3978" Default="" Mode="tcp" Description="Container Port (master server): 3978" Type="Port" Display="always" Required="true" Mask="false">3978</Config>
+  <Config Name="UDP - Game Port2" Target="3978" Default="" Mode="udp" Description="Container Port (master server): 3978" Type="Port" Display="always" Required="true" Mask="false">3978</Config>
+  <Config Name="Game Version to Install" Target="GAME_VERSION" Default="" Mode="" Description="Define the prefered game version (eg: 'jgrpp-0.33.2' without quotes) or set to 'latest' (without quotes) to pull the newest build at each restart." Type="Variable" Display="always" Required="true" Mask="false">latest</Config>
+  <Config Name="OpenGFX Pack Url" Target="GFXPACK_URL" Default="" Mode="" Description="Enter here the OpenGFX url or leave it blank to install it manually (install it in /games/baseset).&#13;&#10;ATTENTION if you change the URL please enter the zip version of the OpenGFX pack!" Type="Variable" Display="always" Required="true" Mask="false">http://bundles.openttdcoop.org/opengfx/releases/0.5.5/opengfx-0.5.5.zip</Config>
+  <Config Name="Compile Cores" Target="COMPILE_CORES" Default="" Mode="" Description="Leave blank if you want to use all cores otherwise define how many cores you want to assign for compiling (Please Note: Compiling is only needed for the first startup or if you change the Game Version to Install; ATTENTION: Assigning fewer cores results in slower compile speed)." Type="Variable" Display="always" Required="false" Mask="false"/>
+</Container>
